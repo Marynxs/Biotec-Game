@@ -1,0 +1,8 @@
+lógica:
+
+carrega o valor de objX e objY inicial uma vez;
+
+while( mouse estiver clicando dentro do obj ){
+	objX = mouse.x;
+	objY = mouse.y;
+}
