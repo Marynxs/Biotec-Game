@@ -1,0 +1,2 @@
+Instalar as extensões do allegro antes de usar esses arquivos!
+Muitos itens da package para colocar no github
