@@ -1,0 +1,4 @@
+﻿  main.c
+C:\Users\Kyang\source\repos\pi\pi\main.c(1,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+C:\Users\Kyang\source\repos\pi\pi\main.c(2,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+  pi.vcxproj -> C:\Users\Kyang\source\repos\pi\x64\Debug\pi.exe
