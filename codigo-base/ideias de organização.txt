@@ -1,0 +1,11 @@
+main.c - 
+	caracteristicas de display e variaveis basicas(timer, queue)
+	bitmap basicos (mouse teclas)
+	chamar as funcoes dos .h
+
+opcoes.h -
+	funcoes de resolução, interfaces
+	e bool de intro e opcoes
+
+clicker.h -
+	
