@@ -64,6 +64,7 @@ int main()
     Rect rect4 = { 0, 300, rect4.x + 200, rect4.y + 100,  0,300,  255,255,255 };
     Rect rect5 = { 210,100,rect5.x + 200,rect5.y + 100,210,100,255,255,0 };
     Rect rect6 = { 210,210,rect6.x + 200,rect6.y + 100,210,210,255,255,0 };
+    Rect rect7 = { 209,0,rect7.x + 201,rect7.y + 98,210,0,153,51,153 };
     Rect retan[4] = { rect1,rect2,rect3,rect4 };
     Rect* selected_rect = NULL;
     bool jafoi1 = false, jafoi2 = false;
@@ -84,11 +85,12 @@ int main()
             }
             al_draw_rectangle(rect5.x, rect5.y, rect5.width, rect5.height, al_map_rgb(255, 255, 255), 1);
             al_draw_rectangle(rect6.x, rect6.y, rect6.width, rect6.height, al_map_rgb(255, 255, 255), 1);
+            al_draw_filled_rectangle(rect7.x, rect7.y, rect7.width, rect7.height, al_map_rgb(rect7.r, rect7.g, rect7.b));
 
-            al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", rect1.x, rect1.y);
+
             if (win >= 2) {
                 al_draw_text(font, al_map_rgb(255, 255, 255), 200, 200, 0, "Venceu");
-                al_draw_bitmap(gamewin, 0, 0, 0);
+                //al_draw_bitmap(gamewin, 0, 0, 0);
             }
 
             al_flip_display();
