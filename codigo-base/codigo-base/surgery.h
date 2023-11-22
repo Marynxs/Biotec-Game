@@ -2,13 +2,18 @@
 
 struct surgeryFirst {
 	ALLEGRO_BITMAP* bitmap;
+	float x;
+	float y;
+	float buffer;
+	bool ativo;
+} vectors[8];
+
+struct box {
 	int x;
 	int y;
-} syringe, syringeJuice;
-struct surgerySecond {
-	ALLEGRO_BITMAP* bitmapIdle;
-	ALLEGRO_BITMAP* bitmapIngame;
-	ALLEGRO_BITMAP* bitmapEnd;
-	int x;
-	int y;
-}bloodBag;
+	double buffer;
+	ALLEGRO_BITMAP* bitmap;
+	ALLEGRO_BITMAP* frame1;
+	ALLEGRO_BITMAP* frame2;
+	ALLEGRO_BITMAP* frame3;
+} doctor, dna;

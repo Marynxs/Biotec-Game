@@ -6,7 +6,7 @@ struct menuItem {
 	float a;
 	ALLEGRO_BITMAP* bitmap;
 	float buffer;
-} iconGame, startButton, menuBg;
+} iconGame, startButton, menuBg, points[3];
 
 struct pngTransparent {
 	int x;
@@ -19,7 +19,7 @@ struct mouseCursor{
 	int y;
 	ALLEGRO_BITMAP* idle;
 	ALLEGRO_BITMAP* clicked;
-} mouse;
+} mouse, surgeryMouse;
 
 struct textBox {
 	int x;
