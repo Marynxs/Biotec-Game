@@ -502,6 +502,12 @@ int main() {
 	al_destroy_timer(timer);
 	al_uninstall_keyboard();
 	al_uninstall_mouse();
+	for (int i = 0; i < 3; i++) {
+		al_destroy_bitmap(rectPadroes[i].bitmap);
+	}
+	for (int j = 0; j < 6; j++) {
+		al_destroy_bitmap(rects[j].bitmap);
+	}
 	al_destroy_bitmap(title);
 	al_destroy_bitmap(borda);
 	al_destroy_bitmap(exit);
