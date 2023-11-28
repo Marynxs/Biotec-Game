@@ -107,13 +107,17 @@ int main() {
 	assert(backgroundSurgery != NULL);
 
 	//patternity
-	RectTemp rectL1 = { 20,30, rectL1.x + 120, rectL1.y + 70,20,30, 255,0,255};
-	RectTemp rectL2 = { 20,100, rectL2.x + 120, rectL2.y + 70,20,100, 0,255,0 };
-	RectTemp rectL3 = { 20,170, rectL3.x + 120, rectL3.y + 70,20,170,255,255,0 };
-	RectTemp rectL4 = { 20,240, rectL4.x + 120, rectL4.y + 70,20,240,0,0,0 };
-	RectTemp rectL5 = { 20,310, rectL5.x + 120, rectL5.y + 70,20,310,255,255,255 };
-	RectTemp rectL6 = { 20,380, rectL6.x + 120, rectL6.y + 70,20,380,100,155,200 };
-	RectTemp rects[6] = { rectL1,rectL2,rectL3,rectL4,rectL5,rectL6};
+	RectLeft rectPadrao1 = { al_load_bitmap("assets/patternity/padrao1.png"), 180,50};
+	RectLeft rectPadrao2 = { al_load_bitmap("assets/patternity/padrao2.png"), 320,50};
+	RectLeft rectPadrao3 = { al_load_bitmap("assets/patternity/padrao3.png"), 460,50 };
+	RectLeft rectPadroes[3] = { rectPadrao1, rectPadrao2, rectPadrao3 };
+	RectLeft rectL1 = { al_load_bitmap("assets/patternity/Esq1.png"),20,30,20,30,rectL1.x + 120, rectL1.y + 70 };
+	RectLeft rectL2 = { al_load_bitmap("assets/patternity/Esq4.png"),20,100,20,100,rectL2.x + 120, rectL2.y + 70 };
+	RectLeft rectL3 = { al_load_bitmap("assets/patternity/Esq2.png"),20,170,20,170,rectL3.x + 120, rectL3.y + 70 };
+	RectLeft rectL4 = { al_load_bitmap("assets/patternity/Esq3.png"),20,240,20,240,rectL4.x + 120, rectL4.y + 70 };
+	RectLeft rectL5 = { al_load_bitmap("assets/patternity/Esq6.png"),20,310,20,310,rectL5.x + 120, rectL5.y + 70 };
+	RectLeft rectL6 = { al_load_bitmap("assets/patternity/Esq5.png"),20,380,20,380,rectL6.x + 120, rectL6.y + 70 };
+	RectLeft rects[6] = { rectL1,rectL2,rectL3,rectL4,rectL5,rectL6};
 	RectRight rectR1 = { 180,150,rectR1.x + 120,rectR1.y + 70};
 	RectRight rectR2 = { 180,250,rectR2.x + 120, rectR2.y + 70 };
 	RectRight rectR3 = { rectR1.width + 20, rectR1.y, rectR3.x + 120, rectR3.y + 70 };
@@ -121,7 +125,7 @@ int main() {
 	RectRight rectR5 = { rectR3.width + 20, rectR1.y, rectR5.x + 120, rectR5.y + 70 };
 	RectRight rectR6 = { rectR3.width + 20, rectR2.y, rectR6.x + 120, rectR6.y + 70 };
 	RectRight rectsR[6] = { rectR1, rectR2, rectR3, rectR4, rectR5, rectR6 };
-	RectTemp* selected_rect = NULL;
+	RectLeft* selected_rect = NULL;
 	int index = -1;
 	int RIndex[6] = {-1,-1,-1,-1,-1,-1};
 	bool correct = false;
@@ -403,9 +407,14 @@ int main() {
 				al_draw_bitmap(blackpng.bitmap, 0, 0, 0);
 
 				//desenha os retangulos (sera mudado para as imagens a esquerda)
-				for (int i = 0; i < 6; i++) {
-					al_draw_filled_rectangle(rects[i].x, rects[i].y, rects[i].width, rects[i].height, al_map_rgb(rects[i].r, rects[i].g, rects[i].b));
-					al_draw_rectangle(rectsR[i].x, rectsR[i].y, rectsR[i].width, rectsR[i].height, al_map_rgb(255, 255, 255), 1);
+				for (int i = 0; i < 3; i++) {
+					al_draw_bitmap(rectPadroes[i].bitmap, rectPadroes[i].x, rectPadroes[i].y, 1);
+				}
+				for (int j = 0; j < 6; j++) {
+					al_draw_bitmap(rects[j].bitmap, rects[j].x, rects[j].y, 1);
+				}
+				for (int k = 0; k < 6; k++) {
+					al_draw_rectangle(rectsR[k].x, rectsR[k].y, rectsR[k].width, rectsR[k].height, al_map_rgb(255, 255, 255), 1);
 				}
 			
 				//define qual retangulo esta sendo selecionado
@@ -528,6 +537,14 @@ int main() {
 			}
 		}
 
+	}
+
+
+	for (int i = 0; i < 3; i++) {
+		al_destroy_bitmap(rectPadroes[i].bitmap);
+	}
+	for (int j = 0; j < 6; j++) {
+		al_destroy_bitmap(rects[j].bitmap);
 	}
 	al_destroy_display(display);
 	al_destroy_font(fontMain);

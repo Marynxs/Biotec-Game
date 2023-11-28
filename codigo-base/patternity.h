@@ -4,21 +4,11 @@ typedef struct {
     ALLEGRO_BITMAP* bitmap;
     int x;
     int y;
-    int width;
-    int height;
     int xInicial;
     int yInicial;
+    int width;
+    int height;
 } RectLeft;
-
-typedef struct {
-    int x;
-    int y;
-    int width;
-    int height;
-    int xInicial;
-    int yInicial;
-    int r, g, b;
-} RectTemp;
 
 typedef struct {
     int x;
@@ -28,7 +18,7 @@ typedef struct {
 } RectRight;
 
 
-bool isInsideRect(int x, int y, RectTemp rect) {
+bool isInsideRect(int x, int y, RectLeft rect) {
     return ((x >= rect.x && x <= rect.width) &&
         (y >= rect.y && y <= rect.height));
 }
@@ -38,12 +28,12 @@ bool isInsideRectR(int x, int y, RectRight rect) {
         (y >= rect.y && y <= rect.height));
 }
 
-bool isInPosition(RectTemp* selected_rect, RectRight target) {
+bool isInPosition(RectLeft* selected_rect, RectRight target) {
     return (selected_rect->x == target.x && selected_rect->y == target.y);
 
 }
 
-bool iscorrect(RectTemp selected_rect, RectRight target) {
+bool iscorrect(RectLeft selected_rect, RectRight target) {
     return (selected_rect.x == target.x && selected_rect.y == target.y);
 }
 

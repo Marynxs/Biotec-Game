@@ -1,3 +1,3 @@
 ﻿  main.c
-E:\Users\Mathe\Documents\Faculdade\PI jogo\Biotec-Game-main\codigo-base\codigo-base\main.c(208,74): warning C4554: '&': verifique a precedência de operador para possível erro; use parênteses para esclarecer a precedência
+E:\Users\Mathe\Documents\Faculdade\PI jogo\Biotec-Game-main\codigo-base\codigo-base\main.c(212,74): warning C4554: '&': verifique a precedência de operador para possível erro; use parênteses para esclarecer a precedência
   codigo-base.vcxproj -> E:\Users\Mathe\Documents\Faculdade\PI jogo\Biotec-Game-main\codigo-base\x64\Debug\codigo-base.exe
