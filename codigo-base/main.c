@@ -107,10 +107,12 @@ int main() {
 	assert(backgroundSurgery != NULL);
 
 	//patternity
+	//Usei como RectLeft pois não precisava criar outro mas esse é o padrão que fica em cima
 	RectLeft rectPadrao1 = { al_load_bitmap("assets/patternity/padrao1.png"), 180,50};
 	RectLeft rectPadrao2 = { al_load_bitmap("assets/patternity/padrao2.png"), 320,50};
 	RectLeft rectPadrao3 = { al_load_bitmap("assets/patternity/padrao3.png"), 460,50 };
 	RectLeft rectPadroes[3] = { rectPadrao1, rectPadrao2, rectPadrao3 };
+	//Esses são os retangulos da esquerda que se movem
 	RectLeft rectL1 = { al_load_bitmap("assets/patternity/Esq1.png"),20,30,20,30,rectL1.x + 120, rectL1.y + 70 };
 	RectLeft rectL2 = { al_load_bitmap("assets/patternity/Esq4.png"),20,100,20,100,rectL2.x + 120, rectL2.y + 70 };
 	RectLeft rectL3 = { al_load_bitmap("assets/patternity/Esq2.png"),20,170,20,170,rectL3.x + 120, rectL3.y + 70 };
@@ -118,6 +120,7 @@ int main() {
 	RectLeft rectL5 = { al_load_bitmap("assets/patternity/Esq6.png"),20,310,20,310,rectL5.x + 120, rectL5.y + 70 };
 	RectLeft rectL6 = { al_load_bitmap("assets/patternity/Esq5.png"),20,380,20,380,rectL6.x + 120, rectL6.y + 70 };
 	RectLeft rects[6] = { rectL1,rectL2,rectL3,rectL4,rectL5,rectL6};
+	//Esses são os retangulos da direita onde são colocados os rentagulos
 	RectRight rectR1 = { 180,150,rectR1.x + 120,rectR1.y + 70};
 	RectRight rectR2 = { 180,250,rectR2.x + 120, rectR2.y + 70 };
 	RectRight rectR3 = { rectR1.width + 20, rectR1.y, rectR3.x + 120, rectR3.y + 70 };
@@ -187,7 +190,7 @@ int main() {
 		if (dialougue) {
 			al_draw_bitmap(textBox.bitmap, 40, 340, 0);
 			if (textBox.buffer >= 1 && textBox.buffer < 3) {
-				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Seja bem-vindo � bioHospital!");
+				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Seja bem-vindo à bioHospital!");
 			}
 			else if (textBox.buffer == 3 && textBox.buffer < 4)
 				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Selecione o minigame.");
