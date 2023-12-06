@@ -1,5 +1,9 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include <time.h>
 #include <math.h>
 #include <allegro5/allegro.h>
@@ -12,7 +16,14 @@
 #include "patternity.h"
 #include "qwer.h"
 
+
 int main() {
+	// escreve os recordes
+	FILE* fp;
+	bool writed = false;
+	int records, recordsA[40];
+
+
 	al_init();
 	al_init_primitives_addon();
 	al_init_image_addon();
@@ -665,12 +676,39 @@ int main() {
 					ends[2] = true;
 				}
 				if (ends[2]) {
+					
 					al_draw_bitmap(rushbg, 0, 0, 0);
 					al_draw_bitmap(blackpng.bitmap, 0, 0, 0);
 					al_draw_bitmap(rushGameover, 0, 0, 0);
 					al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 80, 140, 0, "%d", rushPoints);
-					if (sequence)
+					
+
+					if (sequence) {
 						al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 60, 200, 0, "Total:%.0f", patternPoints + rushPoints + totalDNA);
+						
+						if (!writed) {
+							fp = fopen("recordes.txt", "a");
+							fprintf(fp, "%.0f\n", patternPoints + rushPoints + totalDNA);
+							fclose(fp);
+							writed = true;
+						}
+						int i = 0;
+						fp = fopen("recordes.txt", "r");
+						while (fscanf(fp, "%d", &records) == 1 && i <= 40) {
+							recordsA[i] = records;
+							i++;
+						}
+						insertionSort(recordsA, 40);
+						for (int j = 0; j < 3; j++) {
+							if (j == 0 && recordsA[j] > 0)
+								al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 60, 240, 0, "%d \n", recordsA[j]);
+							else if (j == 1 && recordsA[j] > 0)
+								al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 60, 270, 0, "%d \n", recordsA[j]);
+							else if (j == 2 && recordsA[j] > 0)
+								al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 60, 300, 0, "%d \n", recordsA[j]);
+						}
+						fclose(fp);
+					}
 					if (mouse_state.buttons & 1) {
 						ends[2] = false;
 						minigames[2] = false;
@@ -715,6 +753,7 @@ int main() {
 		}
 	}
 
+	
 	al_destroy_bitmap(option);
 	al_destroy_bitmap(blackpng.bitmap);
 	al_destroy_bitmap(yellowpng.bitmap);

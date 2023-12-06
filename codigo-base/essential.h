@@ -28,3 +28,18 @@ struct textBox {
 	ALLEGRO_BITMAP* textBitmap;
 	ALLEGRO_BITMAP* bitmap;
 }textBox;
+
+void insertionSort(int arr[], int n) {
+	int i, chave, j; //O(1)
+
+	for (i = 1; i < n; i++) { //O(N)
+		chave = arr[i]; //O(N)
+		j = i - 1; //O(N)
+
+		while (j >= 0 && arr[j] < chave) { //O(N)²
+			arr[j + 1] = arr[j]; //O(N)²
+			j = j - 1; //O(N)²
+		}
+		arr[j + 1] = chave; //O(N)²
+	}
+}
