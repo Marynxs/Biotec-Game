@@ -14,6 +14,7 @@
 
 int main() {
 	al_init();
+	al_init_primitives_addon();
 	al_init_image_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
@@ -95,12 +96,12 @@ int main() {
 	//patternity
 	ALLEGRO_BITMAP* paternityBg = al_load_bitmap("assets/paternitybg.png");
 	ALLEGRO_BITMAP* pointsBox = al_load_bitmap("assets/pointsbox.png");
-	//Usei como RectLeft pois n√£o precisava criar outro mas esse √© o padr√£o que fica em cima
+	//Usei como RectLeft pois n„o precisava criar outro mas esse È o padr„o que fica em cima
 	RectLeft rectPadrao1 = { al_load_bitmap("assets/padrao1.png"), 180, 100 };
 	RectLeft rectPadrao2 = { al_load_bitmap("assets/padrao2.png"), 320, 100 };
 	RectLeft rectPadrao3 = { al_load_bitmap("assets/padrao3.png"), 470, 100 };
 	RectLeft rectPadroes[3] = { rectPadrao1, rectPadrao2, rectPadrao3 };
-	//Esses s√£o os retangulos da esquerda que se movem
+	//Esses s„o os retangulos da esquerda que se movem
 	RectLeft rectL1 = { al_load_bitmap("assets/Esq1.png"),20,30,20,30,rectL1.x + 120, rectL1.y + 70 };
 	RectLeft rectL2 = { al_load_bitmap("assets/Esq4.png"),20,100,20,100,rectL2.x + 120, rectL2.y + 70 };
 	RectLeft rectL3 = { al_load_bitmap("assets/Esq2.png"),20,170,20,170,rectL3.x + 120, rectL3.y + 70 };
@@ -108,11 +109,11 @@ int main() {
 	RectLeft rectL5 = { al_load_bitmap("assets/Esq6.png"),20,310,20,310,rectL5.x + 120, rectL5.y + 70 };
 	RectLeft rectL6 = { al_load_bitmap("assets/Esq5.png"),20,380,20,380,rectL6.x + 120, rectL6.y + 70 };
 	RectLeft rects[6] = { rectL1,rectL2,rectL3,rectL4,rectL5,rectL6 };
-	//Esses s√£o os retangulos da direita onde s√£o colocados os rentagulos
-	RectRight rectR1 = { 170,175,rectR1.x + 120,rectR1.y + 70 };
-	RectRight rectR2 = { 170,265,rectR2.x + 120, rectR2.y + 70 };
-	RectRight rectR3 = { rectR1.width + 30, rectR1.y + 10, rectR3.x + 120, rectR3.y + 70 };
-	RectRight rectR4 = { rectR1.width + 30, rectR2.y + 10, rectR4.x + 120, rectR4.y + 70 };
+	//Esses s„o os retangulos da direita onde s„o colocados os rentagulos
+	RectRight rectR1 = { 170,200,rectR1.x + 120,rectR1.y + 70 };
+	RectRight rectR2 = { 170,300,rectR2.x + 120, rectR2.y + 70 };
+	RectRight rectR3 = { rectR1.width + 30, rectR1.y, rectR3.x + 120, rectR3.y + 70 };
+	RectRight rectR4 = { rectR1.width + 30, rectR2.y, rectR4.x + 120, rectR4.y + 70 };
 	RectRight rectR5 = { rectR3.width + 30, rectR1.y, rectR5.x + 120, rectR5.y + 70 };
 	RectRight rectR6 = { rectR3.width + 30, rectR2.y, rectR6.x + 120, rectR6.y + 70 };
 	RectRight rectsR[6] = { rectR1, rectR2, rectR3, rectR4, rectR5, rectR6 };
@@ -191,7 +192,7 @@ int main() {
 		if (dialougue) {
 			al_draw_bitmap(textBox.bitmap, 40, 340, 0);
 			if (countFinal < 1) {
-				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Seja bem-vindo √† bioHospital!");
+				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Seja bem-vindo ‡ bioHospital!");
 			}
 			else if (countFinal >= 1)
 				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Selecione o minigame.");
@@ -313,7 +314,7 @@ int main() {
 		if (patternity) {
 			//Coloca os retangulos nos lugares quando a pessoa soltar o botao esquerdo do mouse
 			if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-				if (selected_rect != NULL) {
+				if (patternity && selected_rect != NULL) {
 					for (int i = 0; i < 6; i++) {
 						if ((isInsideRectR(mouse.x, mouse.y, rectsR[i]))) {
 							selected_rect->x = rectsR[i].x;
@@ -345,30 +346,6 @@ int main() {
 						}
 					}
 
-
-				}
-				//logica para ver se estao todos no local correto
-				if ((mouse.x >= 250 && mouse.x <= 600) && (mouse.y >= 415 && mouse.y <= 460)) {
-					points = 0;
-					if ((RIndex[0] == 0 || RIndex[0] == 2) && (RIndex[1] == 0 || RIndex[1] == 2))//0-2 
-						correct[0] = true;
-
-					if ((RIndex[2] == 3 || RIndex[2] == 5) && (RIndex[3] == 3 || RIndex[3] == 5))//3-5
-						correct[1] = true;
-
-					if ((RIndex[4] == 4 || RIndex[4] == 1) && (RIndex[5] == 4 || RIndex[5] == 1))//4-1
-						correct[2] = true;
-
-					confirm = true;
-				}
-				//verifica se estao todos no local correto
-				if (confirm) {
-					for (int i = 0; i < 3; i++)
-						if (correct[i])
-							points += 1;
-					ends[1] = true;
-					confirm = false;
-					countFinal = 0;
 				}
 			}
 		}
@@ -380,19 +357,19 @@ int main() {
 				al_draw_bitmap(blackpng.bitmap, 0, 0, 0);
 				if (!buttons[0].screen) { //640 - qbttnwidth - 25 || 480 - qbttnheight - 25
 					buttons[0].x = rand() % (640 - 160 - 50) + 30;
-					buttons[0].y = rand() % (480 - 236 - 50) + 25;
+					buttons[0].y = rand() % (480 - 236 - 75) + 25;
 				}
 				if (!buttons[1].screen) {
 					buttons[1].x = rand() % (640 - 178 - 50) + 25;
-					buttons[1].y = rand() % (480 - 189 - 50) + 30;
+					buttons[1].y = rand() % (480 - 189 - 75) + 25;
 				}
 				if (!buttons[2].screen) {
-					buttons[2].x = rand() % (640 - 245 - 50) + 75;
-					buttons[2].y = rand() % (480 - 175 - 50) + 75;
+					buttons[2].x = rand() % (640 - 245 - 50) + 35;
+					buttons[2].y = rand() % (480 - 175 - 75) + 25;
 				}
 				if (!buttons[3].screen) {
-					buttons[3].x = rand() % (640 - 348 - 50) + 65;
-					buttons[3].y = rand() % (480 - 140 - 50) + 100;
+					buttons[3].x = rand() % (640 - 348 - 50) + 45;
+					buttons[3].y = rand() % (480 - 140 - 75) + 25;
 				}
 
 				for (int i = 0; i < 4; i++) {
@@ -549,6 +526,9 @@ int main() {
 				for (int j = 0; j < 6; j++) {
 					al_draw_bitmap(rects[j].bitmap, rects[j].x, rects[j].y, 1);
 				}
+				for (int k = 0; k < 6; k++) {
+					al_draw_rectangle(rectsR[k].x, rectsR[k].y, rectsR[k].width, rectsR[k].height, al_map_rgb(255, 255, 255), 1);
+				}
 				//define qual retangulo esta sendo selecionado
 				for (int i = 0; i < 6; i++) {
 					if (!(mouse_state.buttons & 1)) {
@@ -576,8 +556,26 @@ int main() {
 						}
 					}
 				}
-				
-				
+				//logica para ver se estao todos no local correto
+				if ((mouse_state.buttons & 1) && ((mouse.x >= 250 && mouse.x <= 600) && (mouse.y >= 415 && mouse.y <= 460))) {
+					points = 0;
+					if ((RIndex[0] == 0 || RIndex[0] == 2) && (RIndex[1] == 0 || RIndex[1] == 2))//0-2 
+						correct[0] = true;
+					if ((RIndex[2] == 3 || RIndex[2] == 5) && (RIndex[3] == 3 || RIndex[3] == 5))//3-5
+						correct[1] = true;
+					if ((RIndex[4] == 4 || RIndex[4] == 1) && (RIndex[5] == 4 || RIndex[5] == 1))//4-1
+						correct[2] = true;
+					confirm = true;
+				}
+				//verifica se estao todos no local correto
+				if (confirm) {
+					for (int i = 0; i < 3; i++)
+						if (correct[i])
+							points += 1;
+					ends[1] = true;
+					confirm = false;
+					countFinal = 0;
+				}
 				if (ends[1]) {
 					al_draw_bitmap(pointsBox, 30, 50, 0);
 					al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 75, 150, 0, "%.0f", timing);
