@@ -6,14 +6,13 @@ struct surgeryFirst {
 	float y;
 	float buffer;
 	bool ativo;
-} vectors[8], dnaGameover;
+} vectors[8], congrats, dnaGameover;
 
 struct box {
 	int x;
 	int y;
+	double a;
 	double buffer;
 	ALLEGRO_BITMAP* bitmap;
 	ALLEGRO_BITMAP* frame1;
-	ALLEGRO_BITMAP* frame2;
-	ALLEGRO_BITMAP* frame3;
-} doctor, dna;
+} doctor, dna, instru;

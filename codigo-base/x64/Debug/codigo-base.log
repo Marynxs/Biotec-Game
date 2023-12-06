@@ -1,3 +1,2 @@
 ﻿  main.c
-C:\Users\Kyang\source\repos\Marynxs\Biotec-Game\codigo-base\codigo-base\codigo-base\main.c(467,6): warning C4013: 'al_draw_rectangle' indefinido; assumindo extern retornando int
   codigo-base.vcxproj -> C:\Users\Kyang\source\repos\Marynxs\Biotec-Game\codigo-base\codigo-base\x64\Debug\codigo-base.exe

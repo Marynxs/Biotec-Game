@@ -9,10 +9,8 @@ struct menuItem {
 } iconGame, startButton, menuBg, points[3];
 
 struct pngTransparent {
-	int x;
-	int y;
 	ALLEGRO_BITMAP* bitmap;
-} blackpng, yellowpng, pinkpng, bluepng;
+} blackpng, yellowpng, pinkpng, bluepng, greenpng;
 
 struct mouseCursor{
 	int x;
