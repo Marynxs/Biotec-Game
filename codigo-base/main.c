@@ -92,6 +92,7 @@ int main() {
 	int yPoints = 265;
 	int yBuffer = 5;
 	int total = 0;
+	float totalDNA = 0.0;
 
 	//patternity
 	ALLEGRO_BITMAP* paternityBg = al_load_bitmap("assets/paternitybg.png");
@@ -110,10 +111,10 @@ int main() {
 	RectLeft rectL6 = { al_load_bitmap("assets/Esq5.png"),20,380,20,380,rectL6.x + 120, rectL6.y + 70 };
 	RectLeft rects[6] = { rectL1,rectL2,rectL3,rectL4,rectL5,rectL6 };
 	//Esses são os retangulos da direita onde são colocados os rentagulos
-	RectRight rectR1 = { 170,200,rectR1.x + 120,rectR1.y + 70 };
-	RectRight rectR2 = { 170,300,rectR2.x + 120, rectR2.y + 70 };
-	RectRight rectR3 = { rectR1.width + 30, rectR1.y, rectR3.x + 120, rectR3.y + 70 };
-	RectRight rectR4 = { rectR1.width + 30, rectR2.y, rectR4.x + 120, rectR4.y + 70 };
+	RectRight rectR1 = { 170,175,rectR1.x + 120,rectR1.y + 70 };
+	RectRight rectR2 = { 170,265,rectR2.x + 120, rectR2.y + 70 };
+	RectRight rectR3 = { rectR1.width + 30, rectR1.y + 10, rectR3.x + 120, rectR3.y + 70 };
+	RectRight rectR4 = { rectR1.width + 30, rectR2.y + 10, rectR4.x + 120, rectR4.y + 70 };
 	RectRight rectR5 = { rectR3.width + 30, rectR1.y, rectR5.x + 120, rectR5.y + 70 };
 	RectRight rectR6 = { rectR3.width + 30, rectR2.y, rectR6.x + 120, rectR6.y + 70 };
 	RectRight rectsR[6] = { rectR1, rectR2, rectR3, rectR4, rectR5, rectR6 };
@@ -122,6 +123,7 @@ int main() {
 	int RIndex[6] = { -1,-1,-1,-1,-1,-1 };
 	bool confirm = false, correct[3] = { false, false, false }, confirmDraw = false;
 	int points = 0;
+	float patternPoints = 0.0;
 
 	//rushQWER
 	ALLEGRO_BITMAP* rushbg = al_load_bitmap("assets/rushbg.png");
@@ -314,7 +316,7 @@ int main() {
 		if (patternity) {
 			//Coloca os retangulos nos lugares quando a pessoa soltar o botao esquerdo do mouse
 			if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-				if (patternity && selected_rect != NULL) {
+				if (selected_rect != NULL) {
 					for (int i = 0; i < 6; i++) {
 						if ((isInsideRectR(mouse.x, mouse.y, rectsR[i]))) {
 							selected_rect->x = rectsR[i].x;
@@ -346,6 +348,26 @@ int main() {
 						}
 					}
 
+				}
+				//logica para ver se estao todos no local correto
+				if (((mouse.x >= 250 && mouse.x <= 600) && (mouse.y >= 415 && mouse.y <= 460))) {
+					points = 0;
+					if ((RIndex[0] == 0 || RIndex[0] == 2) && (RIndex[1] == 0 || RIndex[1] == 2))//0-2 
+						correct[0] = true;
+					if ((RIndex[2] == 3 || RIndex[2] == 5) && (RIndex[3] == 3 || RIndex[3] == 5))//3-5
+						correct[1] = true;
+					if ((RIndex[4] == 4 || RIndex[4] == 1) && (RIndex[5] == 4 || RIndex[5] == 1))//4-1
+						correct[2] = true;
+					confirm = true;
+				}
+				//verifica se estao todos no local correto
+				if (confirm) {
+					for (int i = 0; i < 3; i++)
+						if (correct[i])
+							points += 1;
+					ends[1] = true;
+					confirm = false;
+					countFinal = 0;
 				}
 			}
 		}
@@ -382,7 +404,7 @@ int main() {
 					}
 					if (buttons[i].points >= 100) {
 						buttons[i].screen = false;
-						rushPoints += 100;
+						rushPoints += 50;
 					}
 				}
 			}
@@ -485,9 +507,10 @@ int main() {
 					}
 				}
 				if (ends[0]) {
+					totalDNA = (total * timing) / 10.0;
 					al_draw_bitmap(dnaGameover.bitmap, 0, 0, 0);
 					al_draw_textf(fontMain, al_map_rgb(216, 232, 230), 80, 135, 0, "%.0f", timing);
-					al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 80, 255, 0, "%d", total);
+					al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 80, 255, 0, "%.0f", totalDNA);		
 					if (!sequence) {
 						al_draw_text(fontMain, al_map_rgb(33, 30, 51), 80, 365, 0, "RMB to leave");
 						if (mouse_state.buttons & 1) {
@@ -556,33 +579,22 @@ int main() {
 						}
 					}
 				}
-				//logica para ver se estao todos no local correto
-				if ((mouse_state.buttons & 1) && ((mouse.x >= 250 && mouse.x <= 600) && (mouse.y >= 415 && mouse.y <= 460))) {
-					points = 0;
-					if ((RIndex[0] == 0 || RIndex[0] == 2) && (RIndex[1] == 0 || RIndex[1] == 2))//0-2 
-						correct[0] = true;
-					if ((RIndex[2] == 3 || RIndex[2] == 5) && (RIndex[3] == 3 || RIndex[3] == 5))//3-5
-						correct[1] = true;
-					if ((RIndex[4] == 4 || RIndex[4] == 1) && (RIndex[5] == 4 || RIndex[5] == 1))//4-1
-						correct[2] = true;
-					confirm = true;
-				}
-				//verifica se estao todos no local correto
-				if (confirm) {
-					for (int i = 0; i < 3; i++)
-						if (correct[i])
-							points += 1;
-					ends[1] = true;
-					confirm = false;
-					countFinal = 0;
-				}
+				
 				if (ends[1]) {
 					al_draw_bitmap(pointsBox, 30, 50, 0);
-					al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 75, 150, 0, "%.0f", timing);
-					al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 75, 235, 0, "%d/3", points);
+					al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 65, 150, 0, "%.0f", timing);
+					al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 65, 235, 0, "%d/3", points);
+					patternPoints = (1000.0 - timing) * points;
+					if (patternPoints > 0)
+						al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 55, 265, 0, "%.0f", patternPoints);
+					else {
+						al_draw_textf(fontExtra, al_map_rgb(33, 30, 51), 55, 265, 0, "%d", points);
+						patternPoints = points;
+					}
+
 					if (countFinal >= 3) {
 						if (!sequence) {
-							al_draw_textf(fontMain, al_map_rgb(33, 30, 51), 38, 275, 0, "RMB to leave");
+							al_draw_textf(fontMain, al_map_rgb(33, 30, 51), 38, 290, 0, "RMB to leave");
 							if (mouse_state.buttons & 1) {
 								ends[1] = false;
 								minigames[1] = false;
@@ -591,8 +603,8 @@ int main() {
 							}
 						}
 						else {
-							al_draw_textf(fontMain, al_map_rgb(33, 30, 51), 38, 265, 0, "RMB to next");
-							al_draw_textf(fontMain, al_map_rgb(33, 30, 51), 38, 285, 0, "minigame");
+							al_draw_textf(fontMain, al_map_rgb(33, 30, 51), 38, 290, 0, "RMB to next");
+							al_draw_textf(fontMain, al_map_rgb(33, 30, 51), 38, 315, 0, "minigame");
 							if (mouse_state.buttons & 1) {
 								ends[1] = false;
 								minigames[1] = false;
@@ -629,6 +641,9 @@ int main() {
 					else {
 						buttons[i].buffer += 1 / 30.0;
 						buttons[i].points = 0;
+						if (buttons[i].key) {
+							rushPoints -= 10;
+						}
 					}
 				}
 				if (countLose) {
@@ -654,6 +669,8 @@ int main() {
 					al_draw_bitmap(blackpng.bitmap, 0, 0, 0);
 					al_draw_bitmap(rushGameover, 0, 0, 0);
 					al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 80, 140, 0, "%d", rushPoints);
+					if (sequence)
+						al_draw_textf(fontExtra, al_map_rgb(112, 157, 207), 60, 200, 0, "Total:%.0f", patternPoints + rushPoints + totalDNA);
 					if (mouse_state.buttons & 1) {
 						ends[2] = false;
 						minigames[2] = false;
