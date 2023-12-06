@@ -313,7 +313,7 @@ int main() {
 		if (patternity) {
 			//Coloca os retangulos nos lugares quando a pessoa soltar o botao esquerdo do mouse
 			if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
-				if (patternity && selected_rect != NULL) {
+				if (selected_rect != NULL) {
 					for (int i = 0; i < 6; i++) {
 						if ((isInsideRectR(mouse.x, mouse.y, rectsR[i]))) {
 							selected_rect->x = rectsR[i].x;
@@ -557,10 +557,19 @@ int main() {
 					points = 0;
 					if ((RIndex[0] == 0 || RIndex[0] == 2) && (RIndex[1] == 0 || RIndex[1] == 2))//0-2 
 						correct[0] = true;
+					else {
+						correct[0] = false;
+					}
 					if ((RIndex[2] == 3 || RIndex[2] == 5) && (RIndex[3] == 3 || RIndex[3] == 5))//3-5
 						correct[1] = true;
+					else {
+						correct[1] = false;
+					}
 					if ((RIndex[4] == 4 || RIndex[4] == 1) && (RIndex[5] == 4 || RIndex[5] == 1))//4-1
 						correct[2] = true;
+					else {
+						correct[2] = false;
+					}
 					confirm = true;
 				}
 				//verifica se estao todos no local correto
