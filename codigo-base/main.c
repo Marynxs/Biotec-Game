@@ -95,12 +95,12 @@ int main() {
 	//patternity
 	ALLEGRO_BITMAP* paternityBg = al_load_bitmap("assets/paternitybg.png");
 	ALLEGRO_BITMAP* pointsBox = al_load_bitmap("assets/pointsbox.png");
-	//Usei como RectLeft pois n„o precisava criar outro mas esse È o padr„o que fica em cima
+	//Usei como RectLeft pois n√£o precisava criar outro mas esse √© o padr√£o que fica em cima
 	RectLeft rectPadrao1 = { al_load_bitmap("assets/padrao1.png"), 180, 100 };
 	RectLeft rectPadrao2 = { al_load_bitmap("assets/padrao2.png"), 320, 100 };
 	RectLeft rectPadrao3 = { al_load_bitmap("assets/padrao3.png"), 470, 100 };
 	RectLeft rectPadroes[3] = { rectPadrao1, rectPadrao2, rectPadrao3 };
-	//Esses s„o os retangulos da esquerda que se movem
+	//Esses s√£o os retangulos da esquerda que se movem
 	RectLeft rectL1 = { al_load_bitmap("assets/Esq1.png"),20,30,20,30,rectL1.x + 120, rectL1.y + 70 };
 	RectLeft rectL2 = { al_load_bitmap("assets/Esq4.png"),20,100,20,100,rectL2.x + 120, rectL2.y + 70 };
 	RectLeft rectL3 = { al_load_bitmap("assets/Esq2.png"),20,170,20,170,rectL3.x + 120, rectL3.y + 70 };
@@ -108,7 +108,7 @@ int main() {
 	RectLeft rectL5 = { al_load_bitmap("assets/Esq6.png"),20,310,20,310,rectL5.x + 120, rectL5.y + 70 };
 	RectLeft rectL6 = { al_load_bitmap("assets/Esq5.png"),20,380,20,380,rectL6.x + 120, rectL6.y + 70 };
 	RectLeft rects[6] = { rectL1,rectL2,rectL3,rectL4,rectL5,rectL6 };
-	//Esses s„o os retangulos da direita onde s„o colocados os rentagulos
+	//Esses s√£o os retangulos da direita onde s√£o colocados os rentagulos
 	RectRight rectR1 = { 170,175,rectR1.x + 120,rectR1.y + 70 };
 	RectRight rectR2 = { 170,265,rectR2.x + 120, rectR2.y + 70 };
 	RectRight rectR3 = { rectR1.width + 30, rectR1.y + 10, rectR3.x + 120, rectR3.y + 70 };
@@ -191,7 +191,7 @@ int main() {
 		if (dialougue) {
 			al_draw_bitmap(textBox.bitmap, 40, 340, 0);
 			if (countFinal < 1) {
-				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Seja bem-vindo ‡ bioHospital!");
+				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Seja bem-vindo √† bioHospital!");
 			}
 			else if (countFinal >= 1)
 				al_draw_text(textBox.font, al_map_rgb(255, 255, 255), 40 + 30, 340 + 40, 0, "Selecione o minigame.");
@@ -347,6 +347,7 @@ int main() {
 
 
 				}
+				//logica para ver se estao todos no local correto
 				if ((mouse.x >= 250 && mouse.x <= 600) && (mouse.y >= 415 && mouse.y <= 460)) {
 					points = 0;
 					if ((RIndex[0] == 0 || RIndex[0] == 2) && (RIndex[1] == 0 || RIndex[1] == 2))//0-2 
@@ -575,7 +576,7 @@ int main() {
 						}
 					}
 				}
-				//logica para ver se estao todos no local correto
+				
 				
 				if (ends[1]) {
 					al_draw_bitmap(pointsBox, 30, 50, 0);
